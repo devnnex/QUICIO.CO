@@ -1,0 +1,9 @@
+extra_id	nombre	precio	orden	activo
+extra-queso	Queso extra	5000	1	TRUE
+extra-borde-queso	Borde de queso	7000	2	TRUE
+extra-pepperoni	Pepperoni extra	6000	3	TRUE
+extra-tocineta	Tocineta extra	6500	4	TRUE
+extra-champinon	Champiñones extra	4500	5	TRUE
+extra-jalapeno	Jalapeños	3500	6	TRUE
+extra-salsa-ajo	Salsa de ajo	2500	7	TRUE
+extra-salsa-picante	Salsa picante	2500	8	TRUE

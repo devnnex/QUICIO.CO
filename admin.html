@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <title>Admin | Quicio - Caprichos</title>
+  <link rel="icon" type="image/png" href="./images/logo.png">
+  <link rel="apple-touch-icon" href="./images/logo.png">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body class="admin-page" data-admin-view="mesas">
+  <aside class="dashboard-sidebar">
+    <a class="dashboard-brand" href="./index.html" aria-label="Volver a Quicio - Caprichos">
+      <img src="./images/logo.png" alt="Quicio - Caprichos">
+      <span>
+        <strong>Quicio - Caprichos</strong>
+        <small>Panel administrativo</small>
+      </span>
+    </a>
+    <nav class="dashboard-nav" aria-label="Secciones del panel">
+      <a href="#mesas" class="active" data-view="mesas">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h16M6 10v8m12-8v8M8 6h8l2 4H6l2-4Z"/></svg>
+        <span>Mesas</span>
+      </a>
+      <a href="#resumen" data-view="resumen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5m4 14v-7m5 7V8m5 11v-4"/></svg>
+        <span>Ingresos</span>
+      </a>
+      <a href="#ordenes" data-view="ordenes">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10l2 4v12H5V8l2-4Zm-2 4h14M8 12h8M8 16h5"/></svg>
+        <span>Órdenes</span>
+      </a>
+      <a href="#carta" data-view="carta">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5V4Zm4 4h6M9 12h6M9 16h4"/></svg>
+        <span>Carta</span>
+      </a>
+      <a href="#extras" data-view="extras">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M6 6l12 12M18 6 6 18"/></svg>
+        <span>Extras</span>
+      </a>
+      <a href="#inventario" data-view="inventario" class="inventory-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7 12 3l8 4-8 4-8-4Zm0 5 8 4 8-4M4 17l8 4 8-4"/></svg>
+        <span>Inventario</span>
+      </a>
+      <a href="#cajeros" data-view="cajeros">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8a5 5 0 1 0 10 0A5 5 0 0 0 7 8Zm-3 13a8 8 0 0 1 16 0"/></svg>
+        <span>Cajeros</span>
+      </a>
+      <a href="#planes" data-view="planes">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v14H5V5Zm4 4h6M9 13h6M9 17h3"/></svg>
+        <span>Planes</span>
+      </a>
+    </nav>
+    <section class="sidebar-assistants hidden" aria-label="Asistentes por sección">
+      <span class="eyebrow">Asistentes</span>
+      <button type="button" data-open-assistant="mesas">Asistente Mesas</button>
+      <button type="button" data-open-assistant="ingresos">Asistente Ingresos</button>
+      <button type="button" data-open-assistant="carta">Asistente Carta</button>
+      <button type="button" data-open-assistant="inventario">Asistente Inventario</button>
+    </section>
+    <section class="sidebar-chat hidden" id="sidebar-chat" aria-hidden="true">
+      <header>
+        <div>
+          <span class="eyebrow">Chat corporativo</span>
+          <strong id="sidebar-chat-title">Asistente</strong>
+        </div>
+        <button type="button" id="sidebar-chat-close" aria-label="Cerrar asistente">X</button>
+      </header>
+      <div class="assistant-messages" id="sidebar-chat-messages"></div>
+      <form class="assistant-form" id="sidebar-chat-form">
+        <input name="question" placeholder="Escribe tu pregunta">
+        <button class="primary-btn" type="submit">Enviar</button>
+      </form>
+    </section>
+    <a class="secondary-btn dashboard-back" href="./index.html">Ver tienda</a>
+  </aside>
+
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <div>
+        <span class="eyebrow">Dashboard</span>
+        <h1>Centro de control</h1>
+        <p>Mesas, caja, carta, inventario, órdenes y equipo en tiempo real.</p>
+      </div>
+      <div class="dashboard-actions dashboard-actions-session">
+        <div class="session-pill" id="session-pill">
+          <span class="session-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M12 12.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4Z"/>
+              <path d="M4.8 20.2a7.2 7.2 0 0 1 14.4 0"/>
+            </svg>
+          </span>
+          <small>Quicio - Caprichos Admin v4.0</small>
+          <span id="session-role">Sesión</span>
+          <strong id="session-user">Sin iniciar</strong>
+        </div>
+        <button class="notification-permission-btn" id="notification-permission-btn" type="button" aria-pressed="false">
+          <span class="notification-permission-icon" aria-hidden="true">🔔</span>
+          <span id="notification-permission-label">Activar avisos</span>
+        </button>
+        <button class="ghost-btn" id="reload-admin" type="button" aria-label="Recargar datos">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <path d="M20 7v5h-5"/>
+            <path d="M19.2 12a7.2 7.2 0 1 1-2.1-5.1L20 9.8"/>
+          </svg>
+        </button>
+        <button class="session-logout" id="logout-admin" type="button">Salir</button>
+      </div>
+    </header>
+
+    <section class="dashboard-status" id="dashboard-status">Inicia sesión para cargar el panel.</section>
+
+    <section class="kpi-grid admin-view admin-view-summary" id="resumen" aria-label="Indicadores principales">
+      <article class="kpi-card" data-kpi-detail="today"><span>Ingresos hoy</span><strong id="kpi-today-revenue">$ 0</strong><small id="kpi-today-orders">0 ventas realizadas</small></article>
+      <article class="kpi-card" data-kpi-detail="total"><span>Ingresos totales</span><strong id="kpi-revenue">$ 0</strong><small id="kpi-orders">Sin ingresos en este filtro</small></article>
+      <article class="kpi-card" data-kpi-detail="tables"><span>Órdenes WhatsApp/App</span><strong id="kpi-open-tables">0</strong><small>Ventas desde la tienda</small></article>
+      <article class="kpi-card" data-kpi-detail="cash"><span>Caja por mesas</span><strong id="kpi-table-revenue">$ 0</strong><small>Checkout en restaurante</small></article>
+      <article class="kpi-card" data-kpi-detail="pending"><span>Pendientes</span><strong id="kpi-pending">0</strong><small>Por confirmar o preparar</small></article>
+    </section>
+
+    <section class="dashboard-grid admin-view admin-view-summary income-dashboard" aria-label="Detalle de ingresos">
+      <article class="dashboard-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Ingresos</span>
+            <h2>Detalle de caja</h2>
+          </div>
+          <div class="filter-row">
+            <select id="income-source-filter" aria-label="Filtrar origen de ingresos">
+              <option value="todos">Todos</option>
+              <option value="mesas">Mesas</option>
+              <option value="ordenes">Órdenes</option>
+            </select>
+            <select id="income-date-filter" aria-label="Filtrar fecha de ingresos">
+              <option value="hoy">Hoy</option>
+              <option value="semana">Esta semana</option>
+              <option value="todos">Todo</option>
+            </select>
+          </div>
+        </div>
+        <div class="income-list" id="income-list"></div>
+      </article>
+      <article class="dashboard-panel assistant-panel" data-assistant-section="ingresos">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Asistente Ingresos</span>
+            <h2>Análisis rápido</h2>
+          </div>
+        </div>
+        <div class="assistant-messages" id="assistant-ingresos-messages"></div>
+        <form class="assistant-form" data-assistant-form="ingresos">
+          <input name="question" placeholder="Pregunta por ventas, origen o filtros">
+          <button class="primary-btn" type="submit">Enviar</button>
+        </form>
+      </article>
+    </section>
+
+    <section class="admin-view admin-view-tables" id="mesas">
+      <div class="tables-layout">
+        <article class="dashboard-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="eyebrow">Salon</span>
+              <h2>Mesas activas</h2>
+            </div>
+            <form class="inline-create" id="table-form">
+              <input name="table_name" placeholder="Mesa 1" required>
+              <button class="secondary-btn" type="submit">Crear mesa</button>
+            </form>
+          </div>
+          <div class="tables-grid" id="tables-grid"></div>
+        </article>
+
+        <article class="dashboard-panel selected-table-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="eyebrow">Cuenta</span>
+              <h2 id="selected-table-title">Selecciona una mesa</h2>
+            </div>
+            <div class="panel-actions">
+              <button class="secondary-btn" id="print-receipt" type="button">Imprimir recibo</button>
+              <button class="primary-btn" id="open-checkout" type="button">Pagar mesa</button>
+            </div>
+          </div>
+          <div class="table-ticket" id="table-ticket"></div>
+          <form class="quick-expense-form" id="quick-expense-form">
+            <input name="expense_name" placeholder="Gasto rápido: bebida, domicilio, ajuste" required>
+          <input name="expense_amount" placeholder="$ 0" inputmode="numeric" required>
+            <button class="secondary-btn" type="submit">Agregar gasto</button>
+          </form>
+          <div class="assistant-panel compact" data-assistant-section="mesas">
+            <div class="panel-heading">
+              <div><span class="eyebrow">Asistente Mesas</span><h2>Ayuda</h2></div>
+            </div>
+            <div class="assistant-messages" id="assistant-mesas-messages"></div>
+            <form class="assistant-form" data-assistant-form="mesas">
+              <input name="question" placeholder="Pregunta por esta mesa o cuentas abiertas">
+              <button class="primary-btn" type="submit">Enviar</button>
+            </form>
+          </div>
+        </article>
+
+        <article class="dashboard-panel menu-dispatch-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="eyebrow">Despacho</span>
+              <h2>Agregar productos a la mesa</h2>
+            </div>
+            <div class="panel-actions dispatch-heading-actions">
+              <button class="secondary-btn" id="back-to-tables" type="button">Volver a mesas</button>
+              <input id="dispatch-search" type="search" placeholder="Buscar pizza, bebida o extra">
+            </div>
+          </div>
+          <div class="dispatch-products" id="dispatch-products"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="dashboard-grid admin-view admin-view-orders">
+      <article class="dashboard-panel orders-panel" id="ordenes">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Operaciones</span>
+            <h2>Órdenes recientes</h2>
+          </div>
+          <select id="order-status-filter" aria-label="Filtrar órdenes">
+            <option value="todas">Todas</option>
+            <option value="pendientes">Pendientes</option>
+            <option value="nuevo">Nuevas</option>
+            <option value="confirmado">Confirmadas</option>
+            <option value="en cocina">En cocina</option>
+            <option value="despachado">Despachadas</option>
+            <option value="entregado">Entregadas</option>
+            <option value="cancelado">Canceladas</option>
+          </select>
+        </div>
+        <div class="bulk-order-toolbar" id="bulk-order-toolbar">
+          <label class="bulk-order-select-all">
+            <input id="select-all-orders" type="checkbox">
+            <span>Seleccionar visibles</span>
+          </label>
+          <strong id="selected-orders-count">0 seleccionadas</strong>
+          <select id="bulk-order-status" aria-label="Nuevo estado para órdenes seleccionadas">
+            <option value="">Cambiar estado a...</option>
+            <option value="nuevo">Nueva</option>
+            <option value="confirmado">Confirmada</option>
+            <option value="en cocina">En cocina</option>
+            <option value="despachado">Despachada</option>
+            <option value="entregado">Entregada</option>
+            <option value="cancelado">Cancelada</option>
+          </select>
+          <button class="primary-btn" id="apply-bulk-order-status" type="button" disabled>Aplicar a seleccionadas</button>
+        </div>
+        <div class="orders-list" id="orders-list"></div>
+      </article>
+    </section>
+
+    <section class="editor-grid admin-view admin-view-products admin-view-extras">
+      <article class="dashboard-panel editor-panel" id="carta">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Carta</span>
+            <h2>Editar productos</h2>
+          </div>
+          <button class="secondary-btn" id="new-product" type="button">Nuevo</button>
+        </div>
+        <form class="dashboard-form editor-form collapsed" id="product-form">
+          <button class="form-close-x" type="button" data-collapse-form="product-form" aria-label="Cerrar formulario">X</button>
+          <input type="hidden" name="producto_id">
+          <label>Categoría<input name="categoria_id" required placeholder="Ej.: pizzas, combos, bebidas"></label>
+          <label>Nombre<input name="nombre" required placeholder="Ej: Pizza Pepperoni"></label>
+          <label>Precio base<input name="precio" required inputmode="numeric" placeholder="Ej: $ 32.000"></label>
+          <input type="hidden" name="imagen">
+          <label>Posicion en carta<input name="orden" inputmode="numeric" placeholder="Ej: 1"></label>
+          <label>Estado<select name="activo"><option value="true">Activo en la carta</option><option value="false">Oculto temporalmente</option></select></label>
+          <label class="wide">Descripción<textarea name="descripcion" rows="3" placeholder="Ej.: mozzarella, salsa de la casa y pepperoni dorado."></textarea></label>
+          <label class="wide">Tamaños y precios<textarea name="opciones" rows="3" placeholder="Ej.: Personal: $ 32.000, Mediana: $ 48.000, Familiar: $ 68.000"></textarea></label>
+          <div class="form-buttons wide">
+            <button class="secondary-btn" type="button" data-collapse-form="product-form">Cerrar editor</button>
+            <button class="primary-btn" id="product-submit" type="submit">Agregar producto</button>
+          </div>
+        </form>
+        <div class="admin-category-strip" id="product-category-strip" aria-label="Categorías de carta"></div>
+        <div class="admin-table" id="products-table"></div>
+        <div class="assistant-panel compact" data-assistant-section="carta">
+          <div class="panel-heading"><div><span class="eyebrow">Asistente Carta</span><h2>Ayuda</h2></div></div>
+          <div class="assistant-messages" id="assistant-carta-messages"></div>
+          <form class="assistant-form" data-assistant-form="carta">
+            <input name="question" placeholder="Pregunta por productos, precios o categorías">
+            <button class="primary-btn" type="submit">Enviar</button>
+          </form>
+        </div>
+      </article>
+
+      <article class="dashboard-panel editor-panel" id="extras">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Extras</span>
+            <h2>Ingredientes y salsas</h2>
+          </div>
+          <button class="secondary-btn" id="new-extra" type="button">Nuevo</button>
+        </div>
+        <form class="dashboard-form compact editor-form collapsed" id="extra-form">
+          <button class="form-close-x" type="button" data-collapse-form="extra-form" aria-label="Cerrar formulario">X</button>
+          <input type="hidden" name="extra_id">
+          <label>Nombre<input name="nombre" required placeholder="Ej: Queso extra"></label>
+          <label>Precio<input name="precio" required inputmode="numeric" placeholder="Ej: $ 5.000"></label>
+          <label>Posicion<input name="orden" inputmode="numeric" placeholder="Ej: 1"></label>
+          <label>Estado<select name="activo"><option value="true">Activo en la carta</option><option value="false">Oculto temporalmente</option></select></label>
+          <div class="form-buttons wide">
+            <button class="secondary-btn" type="button" data-collapse-form="extra-form">Cerrar editor</button>
+            <button class="primary-btn" type="submit">Guardar extra</button>
+          </div>
+        </form>
+        <div class="admin-table" id="extras-table"></div>
+      </article>
+    </section>
+
+    <section class="admin-view admin-view-inventory" id="inventario">
+      <article class="dashboard-panel editor-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Inventario</span>
+            <h2>Control de insumos</h2>
+          </div>
+          <button class="secondary-btn" id="new-inventory" type="button">Nuevo insumo</button>
+        </div>
+        <form class="dashboard-form compact editor-form collapsed" id="inventory-form">
+          <button class="form-close-x" type="button" data-collapse-form="inventory-form" aria-label="Cerrar formulario">X</button>
+          <input type="hidden" name="inventory_id">
+          <label>Insumo<input name="nombre" required placeholder="Ej: Queso mozzarella"></label>
+          <label>Categoría<input name="categoria" placeholder="Ej.: lácteos, carnes, empaques"></label>
+          <label>Cantidad<input name="cantidad" required inputmode="decimal" placeholder="Ej: 12"></label>
+          <label>Unidad<input name="unidad" placeholder="Ej: kg, unidades, cajas"></label>
+          <label>Costo<input name="costo" inputmode="numeric" placeholder="Ej: $ 80.000"></label>
+          <label>Mínimo<input name="minimo" inputmode="decimal" placeholder="Ej.: 3"></label>
+          <label>Estado<select name="activo"><option value="true">Activo</option><option value="false">Archivado</option></select></label>
+          <div class="form-buttons wide">
+            <button class="secondary-btn" type="button" data-collapse-form="inventory-form">Cerrar editor</button>
+            <button class="primary-btn" type="submit">Guardar insumo</button>
+          </div>
+        </form>
+        <section class="inventory-kpis" id="inventory-kpis" aria-label="Metricas de inventario"></section>
+        <div class="admin-table" id="inventory-table"></div>
+        <article class="dashboard-panel inventory-movements-panel">
+          <div class="panel-heading">
+            <div><span class="eyebrow">Movimientos</span><h2>Retiros recientes</h2></div>
+            <input id="inventory-movement-search" type="search" placeholder="Buscar movimiento">
+          </div>
+          <div class="inventory-movements" id="inventory-movements"></div>
+        </article>
+        <div class="assistant-panel compact" data-assistant-section="inventario">
+          <div class="panel-heading"><div><span class="eyebrow">Asistente Inventario</span><h2>Ayuda</h2></div></div>
+          <div class="assistant-messages" id="assistant-inventario-messages"></div>
+          <form class="assistant-form" data-assistant-form="inventario">
+            <input name="question" placeholder="Pregunta por stock, retiros o alertas">
+            <button class="primary-btn" type="submit">Enviar</button>
+          </form>
+        </div>
+      </article>
+    </section>
+
+    <section class="admin-view admin-view-cashiers" id="cajeros">
+      <article class="dashboard-panel editor-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Equipo</span>
+            <h2>Cajeros y roles</h2>
+          </div>
+          <button class="secondary-btn" id="new-cashier" type="button">Nuevo cajero</button>
+        </div>
+        <form class="dashboard-form compact editor-form collapsed" id="cashier-form">
+          <button class="form-close-x" type="button" data-collapse-form="cashier-form" aria-label="Cerrar formulario">X</button>
+          <input type="hidden" name="cashier_id">
+          <label>Nombre<input name="nombre" required placeholder="Ej: Caja turno noche"></label>
+          <label>Correo<input name="correo" type="email" required placeholder="cajero@quicio.co"></label>
+          <label>Contraseña<input name="clave" type="password" required placeholder="Mínimo 4 caracteres" autocomplete="new-password"></label>
+          <label>Rol<select name="rol"><option value="cajero">Cajero</option><option value="jefe">Jefe</option></select></label>
+          <label>Estado<select name="activo"><option value="true">Activo</option><option value="false">Inactivo</option></select></label>
+          <div class="form-buttons wide">
+            <button class="secondary-btn" type="button" data-collapse-form="cashier-form">Cerrar editor</button>
+            <button class="primary-btn" type="submit">Guardar cajero</button>
+          </div>
+        </form>
+        <div class="admin-table" id="cashiers-table"></div>
+      </article>
+    </section>
+
+    <section class="admin-view admin-view-plans" id="planes">
+      <div class="plans-grid">
+        <video class="plans-video" src="./images/plan.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+        <div class="plans-copy">
+          <span class="eyebrow">Pricing plans</span>
+          <h2>Planes para operar mejor</h2>
+          <p>Implementa un sistema rápido para ventas, mesas, caja e inventario.</p>
+        </div>
+        <article class="plan-card platinum-plan" data-plan-name="Sistema Alquilado" data-plan-price="$ 210.000 COP mensual">
+          <span class="premium-badge platinum-badge">Platinum</span>
+          <span class="eyebrow">Suscripcion mensual</span>
+          <h2>Sistema Alquilado</h2>
+          <strong>$ 210.000 COP</strong>
+          <p>Mensualidad para operar carta, mesas, caja e inventario con soporte continuo.</p>
+          <button class="plan-action" type="button" data-plan-whatsapp="Sistema Alquilado|$ 210.000 COP mensual">Elegir plan</button>
+        </article>
+        <article class="plan-card featured gold-offer" data-plan-name="Sistema del negocio" data-plan-price="$ 3.900.000 COP promocion Gold Offer">
+          <span class="premium-badge">Gold Offer</span>
+          <span class="eyebrow">Pago único</span>
+          <h2>Sistema del negocio</h2>
+          <div class="premium-price-stack" aria-label="Precio promocional">
+            <span class="price-before">Antes $ 5.000.000 COP</span>
+            <strong>$ 3.900.000 COP</strong>
+            <span class="price-save">Promocion limitada · Ahorras $ 1.100.000</span>
+          </div>
+          <p>Tu plataforma propia para vender, recibir pedidos y controlar la operación sin mensualidades.</p>
+          <div class="premium-includes" aria-label="Beneficios incluidos">
+            <span>Aplicacion web de pedidos</span>
+            <span>Panel administrativo completo</span>
+            <span>Carta digital editable</span>
+            <span>Control de caja y mesas</span>
+            <span>Inventario y alertas</span>
+            <span>Gestion de cajeros</span>
+            <span>Pedidos por WhatsApp</span>
+            <span>Soporte y acompanamiento</span>
+            <span>Propiedad del sistema</span>
+            <span>Marca y configuración inicial</span>
+          </div>
+          <small class="premium-note">Operación diaria sin mensualidades: pagas una vez y tu negocio queda con una plataforma lista para crecer.</small>
+          <button class="plan-action" type="button" data-plan-whatsapp="Sistema del negocio Gold Offer|Antes $ 5.000.000 COP, promo $ 3.900.000 COP pago único">Elegir Plan Gold</button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <section class="login-gate" id="login-gate" aria-hidden="true">
+    <form class="login-card" id="login-form" novalidate>
+      <img src="./images/logo.png" alt="Quicio - Caprichos">
+      <span class="eyebrow" id="login-mode-label">Acceso seguro</span>
+      <h2 id="login-title">Entrar al panel</h2>
+      <p id="login-copy">Ingresa con el correo y la contraseña creados para el equipo.</p>
+      <label>Correo
+        <input name="correo" type="email" placeholder="correo@quicio.co" autocomplete="email" required>
+      </label>
+      <label class="password-field">Contraseña
+        <span class="password-input-wrap">
+          <input name="clave" type="password" placeholder="Tu contraseña" autocomplete="current-password" required>
+          <button class="password-toggle" id="login-password-toggle" type="button" aria-label="Mostrar contraseña" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </span>
+      </label>
+      <label class="first-boss-name hidden" id="first-boss-name">Nombre del jefe
+        <input name="nombre" placeholder="Nombre del administrador principal" autocomplete="name">
+      </label>
+      <div class="login-error hidden" id="login-error" role="alert"></div>
+      <button class="primary-btn" id="login-submit" type="submit">Entrar</button>
+      <small id="login-helper">Quicio - Caprichos Admin v4.0</small>
+    </form>
+  </section>
+
+  <section class="modal hidden" id="checkout-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-card admin-modal-card">
+      <button class="round-btn modal-close" id="checkout-close" type="button" aria-label="Cerrar checkout">x</button>
+      <form class="checkout-admin-form" id="table-checkout-form">
+        <span class="eyebrow">Checkout</span>
+        <h2 id="checkout-table-title">Pago de mesa</h2>
+        <div class="checkout-total-line"><span>Total</span><strong id="checkout-total">$ 0</strong></div>
+        <label>Método principal
+          <select name="method_primary">
+            <option value="Efectivo">Efectivo</option>
+            <option value="Nequi">Nequi</option>
+            <option value="Llave Bre-B">Llave Bre-B</option>
+            <option value="Bancolombia">Bancolombia</option>
+            <option value="Pago mixto">Pago mixto</option>
+          </select>
+        </label>
+        <div class="mixed-payment-fields" id="mixed-payment-fields">
+          <label>Primer método
+            <select name="method_one">
+              <option value="Efectivo">Efectivo</option>
+              <option value="Nequi">Nequi</option>
+              <option value="Llave Bre-B">Llave Bre-B</option>
+              <option value="Bancolombia">Bancolombia</option>
+            </select>
+          </label>
+          <label>Valor del primer método<input name="amount_one" inputmode="numeric" placeholder="$ 0"></label>
+          <label>Segundo método
+            <select name="method_two">
+              <option value="Nequi">Nequi</option>
+              <option value="Llave Bre-B">Llave Bre-B</option>
+              <option value="Bancolombia">Bancolombia</option>
+              <option value="Efectivo">Efectivo</option>
+            </select>
+          </label>
+          <label>Valor restante<input name="amount_two" inputmode="numeric" placeholder="$ 0"></label>
+        </div>
+        <label>Observación<textarea name="notes" rows="2" placeholder="Ej.: pago completo, el cliente solicita factura simple"></textarea></label>
+        <div class="form-buttons">
+          <button class="danger-btn" id="cancel-table" type="button">Cancelar mesa</button>
+          <button class="primary-btn" type="submit">Confirmar pago</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="modal hidden" id="smart-dialog" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-card smart-dialog-card">
+      <button class="round-btn modal-close" id="smart-dialog-close" type="button" aria-label="Cerrar diálogo">x</button>
+      <span class="eyebrow" id="smart-dialog-kicker">Quicio - Caprichos Admin</span>
+      <h2 id="smart-dialog-title">Confirmar acción</h2>
+      <p id="smart-dialog-message">Revisa la información antes de continuar.</p>
+      <label class="smart-dialog-field" id="smart-dialog-field">Respuesta
+        <input id="smart-dialog-input" autocomplete="off">
+      </label>
+      <div class="form-buttons smart-dialog-actions">
+        <button class="secondary-btn" id="smart-dialog-cancel" type="button">Cancelar</button>
+        <button class="primary-btn" id="smart-dialog-confirm" type="button">Continuar</button>
+      </div>
+    </div>
+  </section>
+
+  <aside class="new-order-alert hidden" id="new-order-alert" role="alert" aria-live="assertive">
+    <button class="new-order-alert-close" id="new-order-alert-close" type="button" aria-label="Cerrar aviso">×</button>
+    <span class="new-order-alert-icon">🍕</span>
+    <div>
+      <span class="eyebrow">Pedido recibido</span>
+      <h2 id="new-order-alert-title">Nueva orden</h2>
+      <p id="new-order-alert-detail">Hay una orden esperando revisión.</p>
+    </div>
+    <button class="primary-btn" id="new-order-alert-open" type="button">Ver orden</button>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <audio id="order-alert-sound" src="./sound/alert.mp3" preload="auto"></audio>
+  <script src="./admin.js"></script>
+</body>
+</html>

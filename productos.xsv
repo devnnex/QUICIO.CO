@@ -1,0 +1,33 @@
+producto_id	categoria_id	nombre	precio	descripcion	imagen	opciones	orden	activo
+prod-pz1	pizzas	Pizza Pepperoni	32000	Mozzarella, salsa de la casa y pepperoni dorado sobre masa artesanal.	pizza1.png	[{"id":"opt-personal","label":"Personal","price":32000},{"id":"opt-mediana","label":"Mediana","price":48000},{"id":"opt-familiar","label":"Familiar","price":68000}]	1	TRUE
+prod-pz2	pizzas	Pizza Hawaiana	30000	Jamón, piña, mozzarella y salsa napolitana con borde crocante.	pizza2.png	[{"id":"opt-personal","label":"Personal","price":30000},{"id":"opt-mediana","label":"Mediana","price":45000},{"id":"opt-familiar","label":"Familiar","price":64000}]	2	TRUE
+prod-pz3	pizzas	Pizza Pollo Champiñón	34000	Pollo sazonado, champiñones, mozzarella y orégano fresco.	pizza3.png	[{"id":"opt-personal","label":"Personal","price":34000},{"id":"opt-mediana","label":"Mediana","price":50000},{"id":"opt-familiar","label":"Familiar","price":72000}]	3	TRUE
+prod-pz4	pizzas	Pizza Carnes	36000	Pepperoni, jamón, tocineta, carne molida y queso mozzarella.	pizza4.png	[{"id":"opt-personal","label":"Personal","price":36000},{"id":"opt-mediana","label":"Mediana","price":54000},{"id":"opt-familiar","label":"Familiar","price":76000}]	4	TRUE
+prod-pz5	pizzas	Pizza Vegetariana	31000	Tomate, cebolla, pimentón, champiñón, aceitunas y mozzarella.	pizza5.png	[{"id":"opt-personal","label":"Personal","price":31000},{"id":"opt-mediana","label":"Mediana","price":46000},{"id":"opt-familiar","label":"Familiar","price":66000}]	5	TRUE
+prod-pz6	pizzas	Pizza Margarita	29000	Salsa napolitana, mozzarella, tomate fresco, albahaca y aceite de oliva.	pizza6.png	[{"id":"opt-personal","label":"Personal","price":29000},{"id":"opt-mediana","label":"Mediana","price":43000},{"id":"opt-familiar","label":"Familiar","price":62000}]	6	TRUE
+prod-pz7	pizzas	Pizza Cuatro Quesos	35000	Mozzarella, parmesano, cheddar, queso azul suave y base cremosa.	pizza7.png	[{"id":"opt-personal","label":"Personal","price":35000},{"id":"opt-mediana","label":"Mediana","price":52000},{"id":"opt-familiar","label":"Familiar","price":74000}]	7	TRUE
+prod-es1	pizzas-especiales	Quicio Especial	42000	Carnes seleccionadas, vegetales frescos, mozzarella doble y salsa especial.	pizza8.png	[{"id":"opt-mediana","label":"Mediana","price":42000},{"id":"opt-familiar","label":"Familiar","price":76000}]	8	TRUE
+prod-es2	pizzas-especiales	Pizza BBQ Chicken	39000	Pollo BBQ, cebolla caramelizada, mozzarella y toque ahumado.	pizza9.png	[{"id":"opt-mediana","label":"Mediana","price":39000},{"id":"opt-familiar","label":"Familiar","price":70000}]	9	TRUE
+prod-es3	pizzas-especiales	Pizza Mexicana	40000	Carne, jalapeños, maíz, pico de gallo, mozzarella y salsa picante.	pizza10.png	[{"id":"opt-mediana","label":"Mediana","price":40000},{"id":"opt-familiar","label":"Familiar","price":72000}]	10	TRUE
+prod-es4	pizzas-especiales	Pizza Criolla	38000	Maíz, tocineta, pollo, cebolla, pimentón y queso fundido.	pizza11.png	[{"id":"opt-mediana","label":"Mediana","price":38000},{"id":"opt-familiar","label":"Familiar","price":69000}]	11	TRUE
+prod-es5	pizzas-especiales	Pizza Ranchera	41000	Chorizo, maíz, tocineta, pollo, mozzarella y salsa de la casa.	pizza12.png	[{"id":"opt-mediana","label":"Mediana","price":41000},{"id":"opt-familiar","label":"Familiar","price":74000}]	12	TRUE
+prod-es6	pizzas-especiales	Pizza Marinera	45000	Camarones, palmitos, aceitunas, mozzarella y salsa suave de ajo.	pizza13.png	[{"id":"opt-mediana","label":"Mediana","price":45000},{"id":"opt-familiar","label":"Familiar","price":82000}]	13	TRUE
+prod-fam1	pizzas-familiares	Familiar Mitad y Mitad	72000	Pizza familiar con dos sabores a elección para compartir.	pizza14.png		14	TRUE
+prod-fam2	pizzas-familiares	Familiar Carnívora	78000	Extra queso, pepperoni, jamón, tocineta, pollo y carne.	pizza15.png		15	TRUE
+prod-fam3	pizzas-familiares	Familiar Vegetales	68000	Vegetales frescos, mozzarella, aceitunas y salsa napolitana.	pizza16.png		16	TRUE
+prod-fam4	pizzas-familiares	Familiar Super Queso	76000	Doble mozzarella, mezcla de quesos y borde dorado.	pizza17.png		17	TRUE
+prod-pr1	pizzas-premium	Premium Prosciutto	56000	Prosciutto, rúgula, parmesano, mozzarella y reducción balsámica.	pizza18.png	[{"id":"opt-mediana","label":"Mediana","price":56000},{"id":"opt-familiar","label":"Familiar","price":96000}]	18	TRUE
+prod-pr2	pizzas-premium	Premium Trufada	58000	Champiñones, queso crema, mozzarella, aceite de trufa y parmesano.	pizza19.png	[{"id":"opt-mediana","label":"Mediana","price":58000},{"id":"opt-familiar","label":"Familiar","price":99000}]	19	TRUE
+prod-pr3	pizzas-premium	Premium Serrana	54000	Jamón serrano, tomates confitados, mozzarella y albahaca fresca.	pizza20.png	[{"id":"opt-mediana","label":"Mediana","price":54000},{"id":"opt-familiar","label":"Familiar","price":94000}]	20	TRUE
+prod-pr4	pizzas-premium	Premium Burrata	60000	Burrata cremosa, pesto, tomate cherry, mozzarella y masa artesanal.	pizza21.png	[{"id":"opt-mediana","label":"Mediana","price":60000},{"id":"opt-familiar","label":"Familiar","price":104000}]	21	TRUE
+prod-co1	combos	Combo Clásico	56000	Pizza mediana clásica, entrada y bebida para dos personas.	pizza22.png		22	TRUE
+prod-co2	combos	Combo Familiar	92000	Pizza familiar, dos entradas y bebida grande.	pizza23.png		23	TRUE
+prod-co3	combos	Combo Amigos	125000	Dos pizzas medianas, entradas mixtas y bebida grande.	pizza24.png		24	TRUE
+prod-co4	combos	Combo Premium	138000	Pizza premium familiar, entrada especial, bebida grande y salsa extra.	pizza25.png		25	TRUE
+prod-en1	entradas	Pan de Ajo	14000	Panes horneados con mantequilla de ajo, queso y orégano.	pizza26.png		26	TRUE
+prod-en2	entradas	Deditos de Queso	18000	Deditos apanados con queso fundido y salsa de la casa.	pizza27.png		27	TRUE
+prod-en3	entradas	Alitas BBQ	28000	Alitas banadas en salsa BBQ con toque ahumado.	pizza28.png		28	TRUE
+prod-en4	entradas	Papas Quicio	22000	Papas crocantes con queso, tocineta y salsa especial.	pizza29.png		29	TRUE
+prod-be1	bebidas	Gaseosa Personal	5000	Bebida personal fria para acompanar tu pizza.	pizza30.png		30	TRUE
+prod-be2	bebidas	Gaseosa 1.5L	9000	Bebida grande para compartir.	pizza31.png		31	TRUE
+prod-be3	bebidas	Limonada Natural	8000	Limonada fresca preparada al momento.	pizza32.png		32	TRUE
